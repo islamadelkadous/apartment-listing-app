@@ -1,0 +1,137 @@
+{
+	"info": {
+		"_postman_id": "6aac8454-e989-4795-a565-9537fdd69785",
+		"name": "Apartment Listing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22779310"
+	},
+	"item": [
+		{
+			"name": "Add Apartment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var response = pm.response.json()\r",
+							"if(pm.response.code == 200){\r",
+							"   \r",
+							"    pm.collectionVariables.set('apartmentId', response.id);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"unitName\": \"{{$randomStreetName}}\",\r\n    \"unitNumber\": \"{{$randomLoremWord}}\",\r\n    \"project\": \"{{$randomCompanyName}}\",\r\n    \"address\": \"{{$randomStreetAddress}}\",\r\n    \"price\": {{$randomBankAccount}},\r\n    \"bedrooms\": {{$randomInt}},\r\n    \"bathrooms\": {{$randomInt}},\r\n    \"description\": \"{{$randomLoremSentence}}\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/api/apartments",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"apartments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Apartments List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"unitName\": \"{{$randomStreetName}}\",\r\n    \"unitNumber\": \"{{$randomAlphaNumeric}}\",\r\n    \"project\": \"{{$randomCompanyName}}\",\r\n    \"address\": \"{{$randomStreetAddress}}\",\r\n    \"price\": {{$randomBankAccount}},\r\n    \"bedrooms\": {{$randomInt}},\r\n    \"bathrooms\": {{$randomInt}},\r\n    \"description\": \"{{$randomLoremSentence}}\"\r\n  }"
+				},
+				"url": {
+					"raw": "{{BaseURL}}/api/apartments?page=1&limit=10",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"apartments"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "annabel",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Apartment By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/api/apartments/{{apartmentId}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"apartments",
+						"{{apartmentId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseURL",
+			"value": "http://localhost:5000",
+			"type": "default"
+		},
+		{
+			"key": "BaseURL",
+			"value": ""
+		},
+		{
+			"key": "apartmentId",
+			"value": ""
+		}
+	]
+}
