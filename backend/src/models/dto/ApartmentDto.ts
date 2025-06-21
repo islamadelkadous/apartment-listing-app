@@ -16,10 +16,3 @@ export interface ApartmentsResponseDto {
   page: number;
   limit: number;
 }
-
-export interface GetApartmentsServiceResponseDto {
-  apartments: ApartmentDto[];
-  total: number;
-  page: number;
-  limit: number;
-}
